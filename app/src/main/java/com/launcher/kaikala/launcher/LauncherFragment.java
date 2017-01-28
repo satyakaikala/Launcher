@@ -22,6 +22,7 @@ public class LauncherFragment extends Fragment {
     private static final String LOG_TAG = LauncherFragment.class.getSimpleName();
     private RecyclerView recyclerView;
     private static PackageManager packageManager;
+    private static final int verticalSpacing = 5;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -37,8 +38,11 @@ public class LauncherFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.launcher_fragment, container, false);
-        recyclerView = (RecyclerView) view.findViewById(R.id.fragment_launcher)
+        recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
+        VerticalSpaceDecorator decorator = new VerticalSpaceDecorator(getActivity(), R.drawable.drop_shadow, verticalSpacing);
+        recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView.addItemDecoration(decorator);
         setUpAdapter();
         return view;
     }

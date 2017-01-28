@@ -18,7 +18,8 @@ public class LauncherActivity extends AppCompatActivity {
         if (fragment == null) {
             fragment = LauncherFragment.getInstance();
         }
-
-        fragmentManager.beginTransaction().add(R.id.container, fragment).commit();
+        if (!fragment.isAdded()) {
+            fragmentManager.beginTransaction().add(R.id.container, fragment).commit();
+        }
     }
 }
